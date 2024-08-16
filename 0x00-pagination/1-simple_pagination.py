@@ -33,7 +33,8 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        assert type(page) is int and type(page_size) is int, "Page and page size must be int"
+        assert type(page) is int and type(page_size) is int, \
+            "Page and page size must be int"
         assert page > 0, "Page number must be greater than 0"
         assert page_size > 0, "Page size must be greater than 0"
         totlines = len(list(self.dataset()))
@@ -41,4 +42,4 @@ class Server:
         if page > totpages:
             return []
         indexrange = index_range(page, page_size)
-        return [line for line in self.dataset()[indexrange[0]: indexrange[1]]]        
+        return [line for line in self.dataset()[indexrange[0]: indexrange[1]]]
