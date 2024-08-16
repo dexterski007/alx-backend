@@ -42,5 +42,3 @@ class Server:
             return []
         indexrange = self.index_range(page, page_size)
         return [line for line in self.dataset()[indexrange[0]: indexrange[1]]]
-    
-
