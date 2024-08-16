@@ -24,12 +24,12 @@ class Server:
 
         return self.__dataset
 
-    def index_range(self, page: int, page_size: int) -> Tuple[int, ...]:
+    def index_range(self, page: int, page_size: int) -> Tuple[int, int]:
         """ page system """
         page = page - 1
         start_index = page * page_size
         end_index = (page + 1) * page_size
-        return tuple((start_index, end_index))
+        return (start_index, end_index)
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         assert isinstance(page, int) and isinstance(page_size, int)
