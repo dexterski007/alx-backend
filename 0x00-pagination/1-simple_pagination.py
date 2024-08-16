@@ -38,7 +38,5 @@ class Server:
         assert page_size > 0, "Page size must be greater than 0"
         totlines = len(list(self.dataset()))
         totpages = math.ceil(totlines / page_size)
-        if page > totpages or page_size > totlines:
-            return []
         indexrange = self.index_range(page, page_size)
         return [line for line in self.dataset()[indexrange[0]: indexrange[1]]]
