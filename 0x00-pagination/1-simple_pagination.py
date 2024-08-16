@@ -32,7 +32,7 @@ class Server:
         return tuple((start_index, end_index))
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        assert type(page) is int and type(page_size) is int, \
+        assert isinstance(page, int) and isinstance(page_size, int), \
             "Page and page size must be int"
         assert page > 0, "Page number must be greater than 0"
         assert page_size > 0, "Page size must be greater than 0"
