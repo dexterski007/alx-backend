@@ -5,14 +5,6 @@ import csv
 import math
 
 
-def index_range(page: int, page_size: int) -> Tuple[int, ...]:
-    """ page system """
-    page = page - 1
-    start_index = page * page_size
-    end_index = (page + 1) * page_size
-    return tuple((start_index, end_index))
-
-
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -32,6 +24,13 @@ class Server:
 
         return self.__dataset
 
+    def index_range(self, page: int, page_size: int) -> Tuple[int, ...]:
+        """ page system """
+        page = page - 1
+        start_index = page * page_size
+        end_index = (page + 1) * page_size
+        return tuple((start_index, end_index))
+
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         assert type(page) is int and type(page_size) is int, \
             "Page and page size must be int"
@@ -41,5 +40,7 @@ class Server:
         totpages = math.ceil(totlines / page_size)
         if page > totpages or page_size > totlines:
             return []
-        indexrange = index_range(page, page_size)
+        indexrange = self.index_range(page, page_size)
         return [line for line in self.dataset()[indexrange[0]: indexrange[1]]]
+    
+
