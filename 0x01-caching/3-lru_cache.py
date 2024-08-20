@@ -17,12 +17,11 @@ class LRUCache(BaseCaching):
         self.cache_data[key] = item
 
         if key and item:
+            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+                discarded = next(iter(self.cache_data.keys()))
+                self.cache_data.pop(discarded)
+                print("DISCARD: {}".format(discarded))
             self.cache_data[key] = item
-
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            discarded = next(iter(self.cache_data.keys()))
-            self.cache_data.pop(discarded)
-            print("DISCARD: {}".format(discarded))
 
     def get(self, key):
         """ get item func """
