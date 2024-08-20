@@ -14,7 +14,7 @@ class LIFOCache(BaseCaching):
         """ put function func """
         if key and item:
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                discarded = next(reversed(self.cache_data))
+                discarded = list(self.cache_data.keys())[-1]
                 self.cache_data.pop(discarded)
                 print("DISCARD: {}".format(discarded))
             self.cache_data[key] = item
