@@ -16,16 +16,19 @@ class LFUCache(BaseCaching):
         """ put function fix """
         if key and item:
             if key in self.cache_data:
-                self.cache_data.pop(key)
-            self.cache_data[key] = item
-            if key in self.freq.keys():
+                self.cache_data[key] = item
                 self.freq[key] += 1
             else:
-                self.freq[key] = 0
-            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                discarded = next(iter(self.cache_data))
-                self.cache_data.pop(discarded)
-                print("DISCARD: {}".format(discarded))
+                if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                    least = min(self.freq.values())
+                    least_keys = [k for k, v in self.freq.items()
+                                  if v == least]
+                    discarded = min(least_keys, key=self.freq.get)
+                    self.cache_data.pop(discarded)
+                    self.freq.pop(discarded)
+                    print("DISCARD: {}".format(discarded))
+                self.cache_data[key] = item
+                self.freq[key] = 1
 
     def get(self, key):
         """ get item fix """
