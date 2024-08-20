@@ -5,13 +5,13 @@ from base_caching import BaseCaching
 
 
 class LRUCache(BaseCaching):
-    """ Lru cache """
+    """ Lru cache func """
     def __init__(self):
-        """ constructor func """
+        """ constructor func ok """
         super().__init__()
 
     def put(self, key, item):
-        """ put function """
+        """ put function func """
         if key in self.cache_data.keys():
             self.cache_data.pop(key)
         self.cache_data[key] = item
@@ -25,7 +25,7 @@ class LRUCache(BaseCaching):
             print("DISCARD: {}".format(discarded))
 
     def get(self, key):
-        """ get item"""
+        """ get item func """
         if key is None or key not in self.cache_data.keys():
             return
         item = self.cache_data.pop(key)
