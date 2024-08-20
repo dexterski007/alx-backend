@@ -19,7 +19,7 @@ class LFUCache(BaseCaching):
                 self.cache_data.pop(key)
             self.cache_data[key] = item
             if key in self.freq.keys():
-                self.freq[key] += 1    
+                self.freq[key] += 1
             else:
                 self.freq[key] = 0
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
@@ -31,4 +31,4 @@ class LFUCache(BaseCaching):
         """ get item fix """
         if key and key in self.cache_data:
             self.freq[key] += 1
-            return self.cache_data[key]
+            return self.cache_data.get(key)
