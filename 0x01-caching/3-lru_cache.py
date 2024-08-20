@@ -12,6 +12,9 @@ class LRUCache(BaseCaching):
 
     def put(self, key, item):
         """ put function func """
+        if key in self.cache_data.keys():
+            self.cache_data.pop(key)
+        self.cache_data[key] = item
 
         if key and item:
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
@@ -19,13 +22,10 @@ class LRUCache(BaseCaching):
                 self.cache_data.pop(discarded)
                 print("DISCARD: {}".format(discarded))
             self.cache_data[key] = item
-            if key in self.cache_data.keys():
-                self.cache_data.pop(key)
 
     def get(self, key):
         """ get item func """
-        if key is None or key not in self.cache_data.keys():
-            return
-        item = self.cache_data.pop(key)
-        self.cache_data[key] = item
-        return self.cache_data.get(key, None)
+        if key in self.cache_data.keys():
+            item = self.cache_data.pop(key)
+            self.cache_data[key] = item
+            return self.cache_data.get(key, None)
