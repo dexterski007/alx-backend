@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Basic caching system
 """
 from base_caching import BaseCaching
@@ -16,7 +16,7 @@ class LIFOCache(BaseCaching):
             discarded = next(reversed(self.cache_data))
             self.cache_data.pop(discarded)
             print("DISCARD: {}".format(discarded))
-        if key or item:
+        if key and item:
             self.cache_data[key] = item
 
     def get(self, key):

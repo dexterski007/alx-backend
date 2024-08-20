@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Basic caching system
 """
 from base_caching import BaseCaching
@@ -16,7 +16,7 @@ class LRUCache(BaseCaching):
             self.cache_data.pop(key)
         self.cache_data[key] = item
 
-        if key or item:
+        if key and item:
             self.cache_data[key] = item
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
