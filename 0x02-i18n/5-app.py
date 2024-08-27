@@ -42,9 +42,9 @@ def index() -> str:
 
 def get_user():
     """Function to get user information"""
-    user_id = int(request.args.get('login_as'))
-    if user_id in users.keys() and user_id is not None:
-        return users.get(user_id)
+    user_id = request.args.get('login_as')
+    if user_id is not None and int(user_id) in users.keys():
+        return users.get(int(user_id))
     return None
 
 
