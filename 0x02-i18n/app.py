@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Flask app documentation."""
 from flask import Flask, render_template, request, g
-from flask_babel import Babel
+from flask_babel import Babel, format_datetime
+import pytz
 
 
 class Config:
@@ -42,7 +43,8 @@ def get_locale() -> str:
 @app.route("/")
 def index() -> str:
     """Get index route for flask app."""
-    return render_template("6-index.html")
+    g.time = format_datetime()
+    return render_template("index.html")
 
 
 def get_user() -> dict:
@@ -57,6 +59,18 @@ def get_user() -> dict:
 def before_request():
     """Function to get user before request."""
     g.user = get_user()
+
+
+@babel.timezoneselector
+def get_timezone() -> str:
+    """Function to get timezone."""
+    try:
+        if request.args.get('timezone'):
+            return pytz.timezone(request.args.get('timezone')).zone
+        if g.user and g.user['timezone']:
+            return pytz.timezone(g.user['timezone']).zone
+    except pytz.exceptions.UnknownTimeZoneError:
+        return pytz.timezone('UTC').zone
 
 
 if __name__ == "__main__":

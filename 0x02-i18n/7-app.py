@@ -43,7 +43,7 @@ def get_locale() -> str:
 @app.route("/")
 def index() -> str:
     """Get index route for flask app."""
-    return render_template("5-index.html")
+    return render_template("7-index.html")
 
 
 def get_user() -> dict:
