@@ -40,7 +40,7 @@ def index() -> str:
     return render_template("5-index.html")
 
 
-def get_user():
+def get_user() -> dict:
     """Function to get user information"""
     user_id = request.args.get('login_as')
     if user_id is not None and int(user_id) in users.keys():
