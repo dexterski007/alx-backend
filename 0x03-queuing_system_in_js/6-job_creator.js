@@ -4,7 +4,7 @@ const queue = createQueue({name: 'push_notification_code'});
 
 const job = queue.create('push_notification_code', {
   phoneNumber: '05640545450',
-  message: 'Number added successfully',
+  message: 'This is the code to verify your account',
 });
 
 job.on('enqueue', () => {
